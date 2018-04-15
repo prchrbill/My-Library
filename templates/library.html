@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<div class="row divider brown">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ mylibrary.name }}
+			<figure class="creator">
+				<img src="{{ creator.picture}}">
+				<figcaption>{{ creator.name }}</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+	<div class = 'flash'>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+
+				<ul>
+					{% for message in messages %}
+						<li><strong>{{message}}</strong></li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		{% endwith %}
+	</div>
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-5 padding-none">
+			<a href = '{{url_for('newLibraryBook', mylibrary_id=mylibrary.id) }}'>
+				<button class="btn btn-default" id="new-book">
+					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>Add Book
+				</button>
+			<a href = '{{url_for('editLibrary', mylibrary_id=mylibrary.id) }}'>	
+				<button class="btn btn-default" id="edit-library">
+					<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>Edit Library
+				</button>
+			</a>
+			<a href="{{url_for('deleteLibrary', mylibrary_id=mylibrary.id) }}">
+				<button class="btn btn-default delete" id="delete-restaurant">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Library
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	{% if items !=[] %}	
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-12">
+				<h2>Books</h2>
+					{% for i in items %}					
+							<div class="books">
+								<h3>{{i.title}}</h3>
+								<p>Author: {{i.author}}</p>
+								<p>Description: {{i.description}}</p>
+								<p>Genre: {{i.catalog}}</p>
+							</div>
+								<a href = '{{url_for('editLibraryBook', mylibrary_id=mylibrary.id, book_id=i.id) }}'>	
+									<button class="btn btn-default" id="edit-library">
+										<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>Edit Book
+									</button>
+								</a>
+								<a href = '{{url_for('deleteLibraryBook', mylibrary_id=mylibrary.id, book_id=i.id) }}'>	
+									<button class="btn btn-default" id="edit-library">
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete Book
+									</button>
+								</a>
+					{% endfor %}
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}
