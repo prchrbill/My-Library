@@ -1,0 +1,3 @@
+all these files were influenced by the Udacity project.py for the Fullstack Nano degree
+as well as ideas gathered by other git hub users. They were modified to fit my needs
+feel free to modify mine as well.
