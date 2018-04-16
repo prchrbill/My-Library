@@ -187,7 +187,7 @@ def gdisconnect():
 @app.route('/libraries/<int:mylibrary_id>/books/JSON')
 def libraryBooksJSON(mylibrary_id):
     library = session.query(MyLibrary).filter_by(id=mylibrary_id).one_or_none()
-    if genre is None:
+    if library is None:
         return "No such element."
     books = session.query(MyBook).filter_by(
         mylibrary_id=mylibrary_id).all()
@@ -197,7 +197,7 @@ def libraryBooksJSON(mylibrary_id):
 @app.route('/libraries/<int:mylibrary_id>/book/<int:book_id>/JSON')
 def myBooksJSON(mylibrary_id, book_id):
     book = session.query(MyBook).filter_by(id=book_id).one_or_none()
-    if Book_Item is None:
+    if book is None:
         return "No such element."
     return jsonify(MyBook=book.serialize)
 

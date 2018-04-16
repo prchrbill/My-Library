@@ -59,10 +59,9 @@ class MyBook(Base):
                 'catalog': self.catalog,
                 'author': self.author,
             }
-########insert at end of file ##########
 
 
 engine = create_engine('sqlite:///mylibrary.db')
 Base.metadata.create_all(engine)
 
-print "added menu items!"
+print "added library items!"
