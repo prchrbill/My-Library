@@ -25,7 +25,7 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "My Library Application"
 
-engine = create_engine('sqlite:///mylibrary.db', echo=True)
+engine = create_engine('postgresql:////var/www/FlaskApps/mywebiste/mylibrary.db', echo=True)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
