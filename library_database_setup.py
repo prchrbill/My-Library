@@ -61,7 +61,7 @@ class MyBook(Base):
             }
 
 
-engine = create_engine('postgresql:////var/www/FlaskApps/mywebsite/mylibrary.db')
+engine = create_engine('postgresql://Spiderman:freddy03@localhost:5432/mylibrary')
 Base.metadata.create_all(engine)
 
 print "added library items!"

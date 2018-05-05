@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 # this python file was inspired by the fsnd lessons
 # and from several users on git.
@@ -22,10 +21,10 @@ import requests
 app = Flask(__name__)
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('var/www/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "My Library Application"
 
-engine = create_engine('postgresql:////var/www/FlaskApps/mywebiste/mylibrary.db', echo=True)
+engine = create_engine('postgresql://Spiderman:freddy03@localhost:5432/mylibrary', echo=True)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -50,7 +49,7 @@ def gconnect():
     # Obtain authorization code
     code = request.data
     try:
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/var/www/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -233,7 +232,7 @@ def addnewLibrary():
         flash("Your new library has been created succesfully!")
         return redirect(url_for('allLibraries'))
     else:
-        return render_template('newLibrary.html')
+        return render_template('newlibrary.html')
 
 
 # delete library from db, only can be done by creator
@@ -386,4 +385,4 @@ def deleteLibraryBook(mylibrary_id, book_id):
 if __name__ == '__main__':
     app.secret_key = "super_secret_key"
     app.debug = True
-    app.run(host='18.219.106.242', port=80)
+    app.run(host='localhost', port=8000)

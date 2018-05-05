@@ -4,12 +4,12 @@ from sqlalchemy.orm import sessionmaker
 
 from library_database_setup import MyLibrary, Base, MyBook, User
 
-engine = create_engine('postgresql:////var/www/FlaskApps/mywebsite/mylibrary.db')
+engine = create_engine('postgresql://Spiderman:freddy03@localhost:5432/mylibrary')
 
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
- session = DBSession()
+session = DBSession()
 # Create dummy user
 User1 = User(name="William Conover", email="prchrbill@gmail.com",
              picture='https://mattcbr.files.wordpress.com/2006/09/hof002.jpg')
